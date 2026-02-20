@@ -1,4 +1,3 @@
 <x-admin-layout>
-    Hola que hace se la jala o que hace!!!!!
-    
+    Hola Mundo!!!!!
 </x-admin-layout>
