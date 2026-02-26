@@ -1,3 +1,6 @@
+@props([
+    'breadcrumb' => [],
+])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -21,8 +24,11 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased bg-gray-100">
+
         @include('layouts.includes.admin.navigation')
         @include('layouts.includes.admin.sidebar')
+
+
         @livewireScripts
         @yield('content')
 
@@ -30,8 +36,9 @@
         
 <div class="p-4 sm:ml-64 mt-14">
    <div class="mt-14">
-      {{ $slot }}
+      @include('layouts.includes.admin.breadcrumb', ['breadcrumb' => $breadcrumb])
    </div>
+   {{ $slot }}
 </div>
 
 

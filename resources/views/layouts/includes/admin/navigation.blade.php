@@ -13,7 +13,7 @@
   <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h10"/></svg>
     </button>
         <a href="/" class="flex ms-2 md:me-24">
-          <img src="{{ asset('images/Dokkaebi.png') }}" class="h-6 me-4" alt="Healthify Logo" />
+         <!-- <img src="{{ asset('images/Dokka.g') }}" class="h-6 me-4" alt="Healthify Logo" /> -->
           <span class="self-center text-lg font-semibold whitespace-nowrap dark:text-black"></span>
         </a>
       </div>

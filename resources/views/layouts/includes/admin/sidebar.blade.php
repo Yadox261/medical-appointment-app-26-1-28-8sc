@@ -12,9 +12,27 @@
      ],
      [
        'icon' => 'fa-solid fa-user-group',
-       'name' => 'Personas',
+       'name' => 'Tienda en línea',
        'href' => 'route("dashboard")', 
-       'active' => 'request()->routeIs("dashboard")'
+       'active' => 'request()->routeIs("dashboard")',
+       'submenu' => 
+       [   
+         [
+           'name' => 'Productos',
+           'href' => '#', 
+           'active' => false, 
+         ],
+         [
+           'name' => 'Categorías',
+           'href' => '#', 
+           'active' => false,
+         ],
+         [
+           'name' => 'Clientes',
+           'href' => '#', 
+           'active' => false,
+         ]
+       ]
      ]
      
    ];
@@ -22,13 +40,13 @@
 @endphp
 
 <aside id="top-bar-sidebar" class="fixed top-0 left-0 z-40 w-64 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-   <div class="h-full px-3 py-4 overflow-y-auto bg-neutral-primary-soft border-e border-default">
+   <div class="h-full px-5 py-2 overflow-y-auto bg-neutral-primary-soft border-e border-default">
       <a href="/" class="flex items-center ps-2.5 mb-5">
-         <img src="{{ asset('images/Dokkaebi.png') }}" class="h-6 me-3" alt="Healthify Logo" />
-         <span class="self-center text-lg text-heading font-semibold whitespace-nowrap">Hi</span>
+         <img src="{{ asset('images/Dokka.jpg') }}" class="h-12 me-3" alt="Healthify Logo" />
+         <span class="self-center text-lg text-heading font-semibold whitespace-nowrap">Rainbow Force</span>
       </a>
       <ul class="space-y-2 font-medium">
-         @foreach ($Links as $link)
+         @foreach ($Links as $link) 
          <li>
             {{-- Revisa si existe una llave --}}
             @isset($link['header'])
@@ -36,12 +54,36 @@
                 {{$link['header']}}
              </div>
             @else
-            <a href="{{ $link['href'] }}" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group {{ $link['active'] ? 'bg-purple-100' : '' }}">
-               <span class="w-6 h-6 flex items-center justify-center text-gray-500">
-                  <i class="{{ $link['icon'] }}"></i>
-               </span>
-               <span class="ms-3">{{ $link['name'] }}</span>
-            </a>
+            {{-- Revisa si existe una llave submenu --}}
+            @isset($link['submenu'])
+               <button type="button" class="flex items-center w-full justify-between px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group" 
+                  data-collapse-toggle="dropdown-{{ $loop->index }}">
+                  <span class="w-6 h-6 inline-flex items-center justify-center text-gray-500">
+                     <i class="{{ $link['icon'] }}"></i>
+                  </span>
+                  <span class="flex-1 ms-3 text-left whitespace-nowrap">{{ $link['name'] }}</span>
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
+                  </svg>
+               </button>
+                  <ul id="dropdown-{{ $loop->index }}" class="hidden py-2 space-y-2">
+                        @foreach ($link['submenu'] as $item)
+                                    <li>
+                                       <a href="{{ $item['href'] }}" 
+                                          class="pl-10 flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
+                                          {{ $item['name'] }}
+                                       </a>
+                                    </li>
+                        @endforeach
+                  </ul>
+            @else
+                  <a href="{{ $link['href'] }}" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group {{ $link['active'] ? 'bg-purple-100' : '' }}">
+                     <span class="w-6 h-6 flex items-center justify-center text-gray-500">
+                        <i class="{{ $link['icon'] }}"></i>
+                     </span>
+                  <span class="ms-3">{{ $link['name'] }}</span>
+               </a>
+               @endisset
             @endisset
          </li>
          @endforeach 
