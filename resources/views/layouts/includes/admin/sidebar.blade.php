@@ -1,42 +1,21 @@
 @php
-   //Arreglo de iconos (key - value o llave)
    $Links = [ 
      [
        'icon' => 'fa-solid fa-gauge',
        'name' => 'Dashboard',
-       'href' => 'route("dashboard")', 
-       'active' => 'request()->routeIs("dashboard")'
+       'href' => route('admin.dashboard'), 
+       'active' => request()->routeIs('admin.dashboard')
      ],
      [
-       'header' => 'Administración',
+       'header' => 'Gestión',
      ],
      [
-       'icon' => 'fa-solid fa-user-group',
-       'name' => 'Tienda en línea',
-       'href' => 'route("dashboard")', 
-       'active' => 'request()->routeIs("dashboard")',
-       'submenu' => 
-       [   
-         [
-           'name' => 'Productos',
-           'href' => '#', 
-           'active' => false, 
-         ],
-         [
-           'name' => 'Categorías',
-           'href' => '#', 
-           'active' => false,
-         ],
-         [
-           'name' => 'Clientes',
-           'href' => '#', 
-           'active' => false,
-         ]
-       ]
+       'name' => 'Roles y Permisos',
+       'icon' => 'fa-solid fa-shield-halved',
+       'href' => route('admin.roles.index'), 
+       'active' => request()->routeIs('admin.roles.*'),
      ]
-     
    ];
-
 @endphp
 
 <aside id="top-bar-sidebar" class="fixed top-0 left-0 z-40 w-64 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
@@ -48,15 +27,13 @@
       <ul class="space-y-2 font-medium">
          @foreach ($Links as $link) 
          <li>
-            {{-- Revisa si existe una llave --}}
             @isset($link['header'])
              <div class="px-2 py-2 text-xs text-gray-500 uppercase font-semibold">
-                {{$link['header']}}
+                {{ $link['header'] }}
              </div>
             @else
-            {{-- Revisa si existe una llave submenu --}}
             @isset($link['submenu'])
-               <button type="button" class="flex items-center w-full justify-between px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group" 
+               <button type="button" class="flex items-center w-full justify-between px-2 py-1.5 text-gray-700 rounded-lg hover:bg-purple-100 hover:text-purple-700 group" 
                   data-collapse-toggle="dropdown-{{ $loop->index }}">
                   <span class="w-6 h-6 inline-flex items-center justify-center text-gray-500">
                      <i class="{{ $link['icon'] }}"></i>
@@ -66,24 +43,24 @@
                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
                   </svg>
                </button>
-                  <ul id="dropdown-{{ $loop->index }}" class="hidden py-2 space-y-2">
-                        @foreach ($link['submenu'] as $item)
-                                    <li>
-                                       <a href="{{ $item['href'] }}" 
-                                          class="pl-10 flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
-                                          {{ $item['name'] }}
-                                       </a>
-                                    </li>
-                        @endforeach
-                  </ul>
+               <ul id="dropdown-{{ $loop->index }}" class="hidden py-2 space-y-2">
+                  @foreach ($link['submenu'] as $item)
+                     <li>
+                        <a href="{{ $item['href'] }}" 
+                           class="pl-10 flex items-center px-2 py-1.5 text-gray-700 rounded-lg hover:bg-purple-100 hover:text-purple-700 group">
+                           {{ $item['name'] }}
+                        </a>
+                     </li>
+                  @endforeach
+               </ul>
             @else
-                  <a href="{{ $link['href'] }}" class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group {{ $link['active'] ? 'bg-purple-100' : '' }}">
-                     <span class="w-6 h-6 flex items-center justify-center text-gray-500">
-                        <i class="{{ $link['icon'] }}"></i>
-                     </span>
+               <a href="{{ $link['href'] }}" class="flex items-center px-2 py-1.5 text-gray-700 rounded-lg hover:bg-purple-100 hover:text-purple-700 group {{ $link['active'] ? 'bg-purple-100 text-purple-700 font-semibold' : '' }}">
+                  <span class="w-6 h-6 flex items-center justify-center text-gray-500">
+                     <i class="{{ $link['icon'] }}"></i>
+                  </span>
                   <span class="ms-3">{{ $link['name'] }}</span>
                </a>
-               @endisset
+            @endisset
             @endisset
          </li>
          @endforeach 

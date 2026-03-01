@@ -8,5 +8,5 @@
         'href' => route('dashboard')
     ]
 ]">
-    Hola Mundo!!!!!
+    <img src="{{ asset('images/dokkaebi-r6.gif') }}" alt="mi gif" style="width: 1500px; height: 700px;">
 </x-admin-layout>

@@ -1,5 +1,6 @@
 @props([
     'breadcrumb' => [],
+    'title' => '',
 ])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -18,10 +19,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Font Awesome -->
-         <script src="https://kit.fontawesome.com/8e295323f1.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/8e295323f1.js" crossorigin="anonymous"></script>
+        
+        <!-- sweetalert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- wireui scripts -->
         <wireui:scripts />
+
         <!-- Styles -->
         @livewireStyles
     </head>
@@ -30,22 +35,34 @@
         @include('layouts.includes.admin.navigation')
         @include('layouts.includes.admin.sidebar')
 
-
-        @livewireScripts
-        @yield('content')
-
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-        
-<div class="p-4 sm:ml-64 mt-14">
-   <div class="mt-14">
-      @include('layouts.includes.admin.breadcrumb', ['breadcrumb' => $breadcrumb])
-   </div>
-   {{ $slot }}
-</div>
-
+        <div class="p-4 sm:ml-64 mt-14">
+            <h1 class="text-2xl font-semibold text-blue-600">{{ $title }}</h1>
+            <div class="mt-14 flex justify-between items-center w-full">
+                @include('layouts.includes.admin.breadcrumb', ['breadcrumb' => $breadcrumb])
+                @isset($action)
+                    <div>
+                        {{ $action }}
+                    </div>
+                @endisset
+            </div>
+            {{ $slot }}
+        </div>
 
         @stack('modals')
 
+        {{-- Mostrar sweetalerts --}}
+
+        @if (@session('swal'))
+
+            <script>
+                Swal.fire(@json(@session('swal')));
+            </script>
+            
+        @endif
+
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+
+        {{-- Solo una vez, al final del body --}}
         @livewireScripts
     </body>
 </html>
