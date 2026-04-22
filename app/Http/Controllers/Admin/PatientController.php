@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bloodtype;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -45,7 +46,10 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        return view('admin.patients.edit', compact('patient'));
+        $blood_types = Bloodtype::all();
+
+        return view('admin.patients.edit', compact('patient', 'blood_types'));
+
     }
 
     /**

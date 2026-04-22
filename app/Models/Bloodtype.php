@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bloodtype extends Model
 {
-    //relacion uno a muchos con paciente
+    protected $table = 'bloodtypes';
+
     public function patients()
     {
         return $this->hasMany(Patient::class);

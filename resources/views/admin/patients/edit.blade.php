@@ -12,7 +12,7 @@
         'name' => 'Editar',
     ] 
     ]">
- <form action="{{route('admin.patients.update', $patient)}}" method="POST" class="space-y-6">
+<form action="{{route('admin.patients.update', $patient)}}" method="POST" class="space-y-6">
     @csrf
     @method('PUT')
     <x-wire-card>
@@ -96,7 +96,7 @@
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z" clip-rule="evenodd"/>
                     </svg>
-                    Informacion General
+                    Información General
                 </a>
             </li>
 
@@ -120,49 +120,101 @@
         </ul>
     </div>
     {{-- contenido de tabs --}}
-    <div class="p-4 mt-4")>
+    <div class="p-4 mt-4">
         {{-- contenido de tab 1 --}}
         <div x-show="tab === 'datos-personales'">
-        <x-wire-alert shadow="none" padding="none">
-        <x-slot name="slot">
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                <div class="flex flex-col md:flex-row md:items-center gap-4">
-                    
-                    {{-- Lado Izquierdo: Icono y Textos --}}
-                    <div class="flex items-center flex-1">
-                        <div class="flex-shrink-0">
-                            <svg class="w-16 h-16 text-blue-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path fill-rule="evenodd" d="M17 10v1.126c.367.095.714.24 1.032.428l.796-.797 1.415 1.415-.797.796c.188.318.333.665.428 1.032H21v2h-1.126c-.095.367-.24.714-.428 1.032l.797.796-1.415 1.415-.796-.797a3.979 3.979 0 0 1-1.032.428V20h-2v-1.126a3.977 3.977 0 0 1-1.032-.428l-.796.797-1.415-1.415.797-.796A3.975 3.975 0 0 1 12.126 16H11v-2h1.126c.095-.367.24-.714.428-1.032l-.797-.796 1.415-1.415.796.797A3.977 3.977 0 0 1 15 11.126V10h2Zm.406 3.578.016.016c.354.358.574.85.578 1.392v.028a2 2 0 0 1-3.409 1.406l-.01-.012a2 2 0 0 1 2.826-2.83ZM5 8a4 4 0 1 1 7.938.703 7.029 7.029 0 0 0-3.235 3.235A4 4 0 0 1 5 8Zm4.29 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h6.101A6.979 6.979 0 0 1 9 15c0-.695.101-1.366.29-2Z" clip-rule="evenodd"/>
-                            </svg>
+            <x-wire-alert shadow="none" padding="none">
+                <x-slot name="slot">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                        <div class="flex flex-col md:flex-row md:items-center gap-4">
+                            
+                            {{-- Lado Izquierdo: Icono y Textos --}}
+                            <div class="flex items-center flex-1">
+                                <div class="flex-shrink-0">
+                                    <svg class="w-16 h-16 text-blue-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M17 10v1.126c.367.095.714.24 1.032.428l.796-.797 1.415 1.415-.797.796c.188.318.333.665.428 1.032H21v2h-1.126c-.095.367-.24.714-.428 1.032l.797.796-1.415 1.415-.796-.797a3.979 3.979 0 0 1-1.032.428V20h-2v-1.126a3.977 3.977 0 0 1-1.032-.428l-.796.797-1.415-1.415.797-.796A3.975 3.975 0 0 1 12.126 16H11v-2h1.126c.095-.367.24-.714.428-1.032l-.797-.796 1.415-1.415.796.797A3.977 3.977 0 0 1 15 11.126V10h2Zm.406 3.578.016.016c.354.358.574.85.578 1.392v.028a2 2 0 0 1-3.409 1.406l-.01-.012a2 2 0 0 1 2.826-2.83ZM5 8a4 4 0 1 1 7.938.703 7.029 7.029 0 0 0-3.235 3.235A4 4 0 0 1 5 8Zm4.29 5H7a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h6.101A6.979 6.979 0 0 1 9 15c0-.695.101-1.366.29-2Z" clip-rule="evenodd"/>
+                                    </svg>
 
-                        </div>
-                        <div class="ml-3">
-                            <h3 class="text-sm font-bold text-blue-800">Edición de cuenta de usuario</h3>
-                            <p class="text-sm leading-relaxed text-blue-800">
-                                La <strong>información personal</strong> del paciente debe gestionarse desde la cuenta de usuario asociada.
-                            </p>
+                                </div>
+                                <div class="ml-3">
+                                    <h3 class="text-sm font-bold text-blue-800">Edición de cuenta de usuario</h3>
+                                    <p class="text-sm leading-relaxed text-blue-800">
+                                        La <strong>información personal</strong> del paciente debe gestionarse desde la cuenta de usuario asociada.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {{-- Lado Derecho: Botón de Acción --}}
+                            <div class="flex-shrink-0 ml-auto">
+                                <x-wire-button blue sm icon="pencil" :href="route('admin.users.edit', $patient->user)" label="Editar Usuario" target="_blank"/>
+                            </div>
                         </div>
                     </div>
-
-                    {{-- Lado Derecho: Botón de Acción --}}
-                    <div class="flex-shrink-0 ml-auto">
-                        <x-wire-button blue sm icon="pencil" :href="route('admin.users.edit', $patient->user)" label="Editar Usuario" target="_blank"/>
-                    </div>
-
+                </x-slot>
+            </x-wire-alert>
+            <div class="grid lg:grid-cols-2 gap-4 mt-4">
+                <div>
+                    <span class="text-gray-600 font-semibold"><strong>Nombre: </strong> {{ $patient->user->name }}</span>
+                </div>
+                <div>
+                    <span class="text-gray-600 font-semibold"><strong>Email: </strong> {{ $patient->user->email }}</span>
+                </div>
+                <div>
+                    <span class="text-gray-600 font-semibold"><strong>Teléfono: </strong> {{ $patient->user->phone }}</span>
                 </div>
             </div>
-    </x-slot>
-</x-wire-alert>
         </div>
-        <div x-show="tab === 'antecedentes-medicos'">
-            
+        {{-- contenido de tab 2 --}}
+        <div x-show="tab === 'antecedentes-medicos'", style="display: none">
+            <div class="grid lg:grid-cols-2 gap-4">
+                <div>
+                    <x-wire-textarea label="Alergias Conoscidas" name="allergies">
+                        {{ old('allergies', $patient->allergies) }}
+                    </x-wire-textarea>
+                </div>
+                <div>
+                    <x-wire-textarea label="Enfermedades Crónicas" name="chronic_diseases">
+                        {{ old('chronic_diseases', $patient->chronic_diseases) }}
+                    </x-wire-textarea>
+                </div>
+                <div>
+                    <x-wire-textarea label="Antecedentes familiares" name="family_history">
+                        {{ old('family_history', $patient->family_history) }}
+                    </x-wire-textarea>
+                </div>
+                <div>
+                    <x-wire-textarea label="Antecedentes quirúrgicos" name="surgical_history">
+                        {{ old('surgical_history', $patient->surgical_history) }}
+                    </x-wire-textarea>
+                </div>
+            </div>
         </div>
-        <div x-show="tab === 'informacion-general'">
-            
+        {{-- contenido de tab 3 --}}
+        <div x-show="tab === 'informacion-general'", style="display: none">
+            <div class="grid lg:grid-cols-2 gap-4">
+                <x-wire-native-select label="Tipo de sangre" class="mb-4" name="bloodtype_id" wire:model="bloodtype_id">
+                    <option value="">Seleccione un tipo de sangre</option>
+                    @foreach ($blood_types as $blood_type)
+                        <option value="{{ $blood_type->id }}" @selected(old('bloodtype_id') == $blood_type->id or $patient->bloodtype_id == $blood_type->id)>
+                            {{ $blood_type->name }}
+                        </option>
+                    @endforeach
+                </x-wire-native-select>
+                    <x-wire-input label="Peso (kg)" name="weight" placeholder="Peso del paciente" value="{{old('weight', $patient->weight) }}"></x-wire-input>
+                    <x-wire-input label="Altura (cm)" name="height" placeholder="Altura del paciente" value="{{old('height', $patient->height) }}"></x-wire-input>
+                    <x-wire-input label="Observaciones" name="observations" placeholder="Observaciones del paciente" value="{{old('observations', $patient->observations) }}"></x-wire-input>                    
+            </div>
         </div>
-        <div x-show="tab === 'contacto-emergencia'">
+        {{-- contenido de tab 4 --}}
+        <div x-show="tab === 'contacto-emergencia'", style="display: none">
+            <div class="grid lg:grid-cols-2 gap-4">
+                <x-wire-input label="Nombre del contacto" name="emergency_contact_name" placeholder="Nombre del contacto de emergencia" value="{{old('emergency_contact_name', $patient->emergency_contact_name) }}"></x-wire-input>
+                <x-wire-input label="Teléfono del contacto" name="emergency_contact_phone" placeholder="Teléfono del contacto de emergencia" value="{{old('emergency_contact_phone', $patient->emergency_contact_phone) }}"></x-wire-input>
+                <x-wire-input label="Relación con el paciente" name="emergency_contact_relationship" placeholder="Relación con el paciente" value="{{old('emergency_contact_relationship', $patient->emergency_contact_relationship) }}"></x-wire-input>
+            </div>
            
         </div>
+
     </div>
 </x-wire-card>
 </form>
