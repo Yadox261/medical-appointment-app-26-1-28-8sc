@@ -38,7 +38,7 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        return view('admin.patients.show', compact('patient'));
+        return view('admin.patients.index', compact('patient'));
     }
 
     /**
@@ -57,7 +57,28 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        //
+      $request->validate([
+        'allergies'                      => 'nullable|string',
+        'chronic_diseases'               => 'nullable|string',
+        'family_history'                 => 'nullable|string',
+        'surgical_history'               => 'nullable|string',
+        'bloodtype_id'                   => 'nullable|exists:bloodtypes,id',
+        'weight'                         => 'nullable|numeric',
+        'height'                         => 'nullable|numeric',
+        'observations'                   => 'nullable|string',
+        'emergency_contact_name'         => 'required|string|max:255',
+        'emergency_contact_phone'        => 'required|string|max:20',
+        'emergency_contact_relationship' => 'required|string|max:255',
+    ]);
+
+    $patient->update($request->only([
+        'allergies', 'chronic_diseases', 'family_history', 'surgical_history',
+        'bloodtype_id', 'weight', 'height', 'observations',
+        'emergency_contact_name', 'emergency_contact_phone', 'emergency_contact_relationship',
+    ]));
+
+    return redirect()->route('admin.patients.edit', $patient)
+        ->with('success', 'Paciente actualizado correctamente.');
     }
 
     /**
