@@ -1,10 +1,12 @@
+{{-- aqui se define el menú de tabs--}}
 @php
+        // Definimos grupos de campos para cada tab para detectar errores y activar la tab correspondiente
     $errorGroups = [
         'antecedentes'       => ['allergies', 'chronic_diseases', 'family_history', 'surgical_history'],
         'informacion-general'=> ['bloodtype_id', 'weight', 'height', 'observations'],
         'contacto-emergencia'=> ['emergency_contact_name', 'emergency_contact_phone', 'emergency_contact_relationship'],
     ];
-
+    // Determinamos la tab inicial a mostrar en base a los errores de validación
     $initialTab = 'datos-personales';
     foreach ($errorGroups as $tabName => $fields) {
         if ($errors->hasAny($fields)) {
@@ -13,14 +15,14 @@
         }
     }
 @endphp
-
+{{--bread chromes --}}
 <x-admin-layout title="Editar" :breadcrumb="[
     ['name' => 'Dashboard', 'href' => route('admin.dashboard')],
     ['name' => 'Pacientes', 'href' => route('admin.patients.index')],
     ['name' => 'Editar'],
 ]">
 
-<form action="{{ route('admin.patients.update', $patient) }}" method="POST" class="space-y-6">
+<form action="{{ route('admin.patients.update', $patient) }}" method="POST" class="space-y-6"> {{-- Aqui se define el formulario --}}
     @csrf
     @method('PUT')
 
@@ -45,6 +47,7 @@
     </x-wire-card>
 
     <x-wire-card>
+        {{-- Menú de tabs, se define el inicio de cada tab con los grupos de errores --}}
         <x-tabs
             :active="$initialTab"
             :errors-antecedentes="$errors->hasAny($errorGroups['antecedentes'])"
