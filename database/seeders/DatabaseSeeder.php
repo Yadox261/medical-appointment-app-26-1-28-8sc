@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         //llaar a los seeders creados
         $this->call(RoleSeeder::class);
+        $this->call(DoctorAppointmentSeeder::class);
 
         //crear usuario de prueba cada vez que se ejecute el seeder
         User::factory()->create([
