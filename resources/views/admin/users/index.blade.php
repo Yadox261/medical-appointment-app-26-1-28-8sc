@@ -17,6 +17,7 @@
                 <thead class="bg-neutral-primary-soft text-xs text-gray-500 uppercase">
                     <tr>
                         <th class="px-4 py-3">ID</th>
+                        <th class="px-4 py-3">Documento</th>
                         <th class="px-4 py-3">Nombre</th>
                         <th class="px-4 py-3">Email</th>
                         <th class="px-4 py-3">Acciones</th>
@@ -26,6 +27,7 @@
                     @forelse ($users as $user)
                         <tr class="hover:bg-gray-50 transition">
                             <td class="px-4 py-3 text-gray-500">{{ $user->id }}</td>
+                            <td class="px-4 py-3 font-medium text-gray-700">{{ $user->id_number ?? '-' }}</td>
                             <td class="px-4 py-3 font-medium text-gray-800">{{ $user->name }}</td>
                             <td class="px-4 py-3 text-gray-600">{{ $user->email }}</td>
                             <td class="px-4 py-3">

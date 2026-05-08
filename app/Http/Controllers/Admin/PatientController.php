@@ -59,7 +59,8 @@ class PatientController extends Controller
     {
       $request->validate([
         'allergies'                      => 'nullable|string',
-        'chronic_diseases'               => 'nullable|string',
+        'medical_history'                => 'nullable|string',
+        'chronical_conditions'           => 'nullable|string',
         'family_history'                 => 'nullable|string',
         'surgical_history'               => 'nullable|string',
         'bloodtype_id'                   => 'nullable|exists:bloodtypes,id',
@@ -72,7 +73,7 @@ class PatientController extends Controller
     ]);
 
     $patient->update($request->only([
-        'allergies', 'chronic_diseases', 'family_history', 'surgical_history',
+        'allergies', 'medical_history', 'chronical_conditions', 'family_history', 'surgical_history',
         'bloodtype_id', 'weight', 'height', 'observations',
         'emergency_contact_name', 'emergency_contact_phone', 'emergency_contact_relationship',
     ]));

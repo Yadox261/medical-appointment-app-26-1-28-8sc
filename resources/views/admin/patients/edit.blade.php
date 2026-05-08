@@ -2,7 +2,7 @@
 @php
         // Definimos grupos de campos para cada tab para detectar errores y activar la tab correspondiente
     $errorGroups = [
-        'antecedentes'       => ['allergies', 'chronic_diseases', 'family_history', 'surgical_history'],
+        'antecedentes'       => ['allergies', 'medical_history', 'chronical_conditions', 'family_history', 'surgical_history'],
         'informacion-general'=> ['bloodtype_id', 'weight', 'height', 'observations'],
         'contacto-emergencia'=> ['emergency_contact_name', 'emergency_contact_phone', 'emergency_contact_relationship'],
     ];
@@ -144,8 +144,14 @@
                             <span x-text="texto.length"></span> / <span x-text="limite"></span>
                         </p>
                     </div>
-                    <div x-data="{ texto: '{{ old('chronic_diseases', $patient->chronic_diseases) }}', limite: 300 }">
-                        <x-wire-textarea label="Enfermedades Crónicas" name="chronic_diseases" x-model="texto" maxlength="300">{{ old('chronic_diseases', $patient->chronic_diseases) }}</x-wire-textarea>
+                    <div x-data="{ texto: '{{ old('medical_history', $patient->medical_history) }}', limite: 300 }">
+                        <x-wire-textarea label="Antecedentes médicos" name="medical_history" x-model="texto" maxlength="300">{{ old('medical_history', $patient->medical_history) }}</x-wire-textarea>
+                        <p class="text-sm mt-1 text-right" :class="texto.length >= limite ? 'text-red-500 font-semibold' : 'text-gray-400'">
+                            <span x-text="texto.length"></span> / <span x-text="limite"></span>
+                        </p>
+                    </div>
+                    <div x-data="{ texto: '{{ old('chronical_conditions', $patient->chronical_conditions) }}', limite: 300 }">
+                        <x-wire-textarea label="Enfermedades Crónicas" name="chronical_conditions" x-model="texto" maxlength="300">{{ old('chronical_conditions', $patient->chronical_conditions) }}</x-wire-textarea>
                         <p class="text-sm mt-1 text-right" :class="texto.length >= limite ? 'text-red-500 font-semibold' : 'text-gray-400'">
                             <span x-text="texto.length"></span> / <span x-text="limite"></span>
                         </p>

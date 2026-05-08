@@ -23,6 +23,19 @@ class User extends Authenticatable
     use HasRoles;
 
     /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function ($user) {
+            if (empty($user->id_number)) {
+                // Genera un prefijo con la fecha y un texto aleatorio (Ej: USR-20260508-A4B2)
+                $user->id_number = 'USR-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(4));
+            }
+        });
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -31,6 +44,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'country_code',
+        'id_number',
+        'phone',
+        'address',
     ];
 
     /**

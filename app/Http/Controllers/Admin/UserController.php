@@ -25,16 +25,24 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-            'roles'    => 'array',
+            'name'      => 'required|string|max:255',
+            'email'        => 'required|email|unique:users,email',
+            'country_code' => 'required|string|max:10',
+            'phone'        => 'nullable|string|max:20',
+            'id_number' => 'nullable|string|max:50',
+            'address'   => 'nullable|string|max:500',
+            'password'  => 'required|string|min:8|confirmed',
+            'roles'     => 'array',
         ]);
 
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => bcrypt($request->password),
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'country_code' => $request->country_code,
+            'phone'        => $request->phone,
+            'id_number'    => $request->id_number,
+            'address'      => $request->address,
+            'password'     => bcrypt($request->password),
         ]);
 
         if ($request->roles) {
@@ -69,15 +77,23 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed',
-            'roles'    => 'array',
+            'name'      => 'required|string|max:255',
+            'email'        => 'required|email|unique:users,email,' . $user->id,
+            'country_code' => 'required|string|max:10',
+            'phone'        => 'nullable|string|max:20',
+            'id_number' => 'nullable|string|max:50',
+            'address'   => 'nullable|string|max:500',
+            'password'  => 'nullable|string|min:8|confirmed',
+            'roles'     => 'array',
         ]);
 
         $user->update([
-            'name'  => $request->name,
-            'email' => $request->email,
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'country_code' => $request->country_code,
+            'phone'        => $request->phone,
+            'id_number'    => $request->id_number,
+            'address'      => $request->address,
         ]);
 
         if ($request->filled('password')) {

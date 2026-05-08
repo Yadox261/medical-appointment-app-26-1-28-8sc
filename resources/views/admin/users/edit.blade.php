@@ -37,6 +37,51 @@
                 @enderror
             </div>
 
+            {{-- Teléfono con Código de País --}}
+            <div class="mb-4">
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                <div class="flex">
+                    <select name="country_code" id="country_code"
+                        class="px-3 py-2 text-sm border border-gray-300 rounded-l-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-500 border-r-0">
+                        <option value="+52" {{ old('country_code', $user->country_code ?? '+52') == '+52' ? 'selected' : '' }}>🇲🇽 +52</option>
+                        <option value="+1" {{ old('country_code', $user->country_code) == '+1' ? 'selected' : '' }}>🇺🇸 +1</option>
+                        <option value="+34" {{ old('country_code', $user->country_code) == '+34' ? 'selected' : '' }}>🇪🇸 +34</option>
+                        <option value="+54" {{ old('country_code', $user->country_code) == '+54' ? 'selected' : '' }}>🇦🇷 +54</option>
+                        <option value="+57" {{ old('country_code', $user->country_code) == '+57' ? 'selected' : '' }}>🇨🇴 +57</option>
+                        <option value="+56" {{ old('country_code', $user->country_code) == '+56' ? 'selected' : '' }}>🇨🇱 +56</option>
+                        <option value="+51" {{ old('country_code', $user->country_code) == '+51' ? 'selected' : '' }}>🇵🇪 +51</option>
+                    </select>
+                    <input type="text" name="phone" id="phone" value="{{ old('phone', $user->phone) }}" placeholder="1234567890"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-purple-500 {{ $errors->has('phone') ? 'border-red-500' : '' }}">
+                </div>
+                @error('country_code')
+                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+                @error('phone')
+                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- Número de Identificación --}}
+            <div class="mb-4">
+                <label for="id_number" class="block text-sm font-medium text-gray-700 mb-1">Número de ID / Documento</label>
+                <input type="text" name="id_number" id="id_number" value="{{ old('id_number', $user->id_number) }}"
+                    class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 {{ $errors->has('id_number') ? 'border-red-500' : '' }}">
+                @error('id_number')
+                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
+
+            {{-- Dirección --}}
+            <div class="mb-4">
+                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+                <input type="text" name="address" id="address" value="{{ old('address', $user->address) }}"
+                    class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 {{ $errors->has('address') ? 'border-red-500' : '' }}">
+                @error('address')
+                    <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                @enderror
+            </div>
+
             {{-- Contraseña --}}
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-700 mb-1">

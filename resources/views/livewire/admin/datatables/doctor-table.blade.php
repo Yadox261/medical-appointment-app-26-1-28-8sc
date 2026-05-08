@@ -21,6 +21,9 @@
                     <th class="px-6 py-3 cursor-pointer" wire:click="sort('users.name')">
                         Nombre {{ $sortBy === 'users.name' ? ($sortDir === 'asc' ? '↑' : '↓') : '' }}
                     </th>
+                    <th class="px-6 py-3 cursor-pointer" wire:click="sort('users.id_number')">
+                        Documento {{ $sortBy === 'users.id_number' ? ($sortDir === 'asc' ? '↑' : '↓') : '' }}
+                    </th>
                     <th class="px-6 py-3 cursor-pointer" wire:click="sort('users.email')">
                         Correo {{ $sortBy === 'users.email' ? ($sortDir === 'asc' ? '↑' : '↓') : '' }}
                     </th>
@@ -42,6 +45,7 @@
                                 {{ $doctor->user->name }}
                             </div>
                         </td>
+                        <td class="px-6 py-4">{{ $doctor->user->id_number ?? '—' }}</td>
                         <td class="px-6 py-4">{{ $doctor->user->email }}</td>
                         <td class="px-6 py-4">
                             @if($doctor->specialty)

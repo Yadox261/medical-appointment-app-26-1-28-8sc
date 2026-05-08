@@ -41,7 +41,7 @@ class DoctorTable extends Component
     {
         $doctors = Doctor::query()
             ->join('users', 'users.id', '=', 'doctors.user_id')
-            ->select('doctors.*', 'users.name', 'users.email')
+            ->select('doctors.*', 'users.name', 'users.email', 'users.id_number')
             ->when($this->search, function (Builder $q) {
                 $q->where('users.name', 'like', '%' . $this->search . '%')
                   ->orWhere('users.email', 'like', '%' . $this->search . '%')
